@@ -1,4 +1,5 @@
 #include "../master.h"
+#include "../applications/snake/snake.h"
 
 char term_buffer[100] = {0};
 int run = 1;
@@ -18,7 +19,8 @@ char* help = "Help:\n\t.exit: end the program completely\n\techo: prints the inp
 void exec() {
     char temp_buff[100]; // holds arguments
     static char buff_filename[20]; // holds the filename when new files are being created and loaded and keeps it static between execs
-    if(strcmp(term_buffer, ".exit") == 0) { //if the term buffer hold exit
+    char *cmd = lsplit(term_buffer, ' ', temp_buff);
+    if(strcmp(cmd, ".exit") == 0) { //if the term buffer hold exit
         strcpy(term_buffer, ""); // resets the buffer
         run = 0; // stops the main loops
         return; // end exec
@@ -62,8 +64,9 @@ void exec() {
             strcpy(term_buffer, ""); // resets the buffer
             return;
         }
-        vga_char *loaded_file = read_file(buff_filename, loaded_file); 
-        memcopy((char*)VGA_MEMORY, *loaded_file, stored_vga_length*2); 
+        vga_char loaded_file[VGA_WIDTH * VGA_HEIGHT];
+        read_file(buff_filename, loaded_file);
+        memcopy((char*)VGA_MEMORY, loaded_file, stored_vga_length*2);
         term_putchar('\n');
         return;
     } else if(strcmp(lsplit(term_buffer, ' ', temp_buff), ".write_file") == 0) {
@@ -84,19 +87,23 @@ void exec() {
         state.write_file = 0;
         term_putchar('\n');
         return; 
-    } else if(strcmp(".clear", term_buffer) == 0) {
+    } else if(strcmp(".clear", cmd) == 0) {
         init_vga();
         curser_loc(0);
         return;
-    } else if(strcmp(term_buffer, ".ls") == 0) {
+    } else if(strcmp(cmd, ".ls") == 0) {
         char *buff[INODE_COUNT]; // tells ls how many strings are in this array. 
         ls(buff); // loads all the strings into array
         int i = 0;
-        while(buff[i] != '\0') { //checks if the string its at is null
+        while(buff[i] != NULL) { //checks if the string its at is null
             term_putstr(buff[i]); // put the string at buff 
             term_putchar('\n');
             i++; //incrememnt 1 string 
         }
+    } else if(strcmp(cmd, ".snake") == 0) { 
+        init_snake();
+        snake();
+        return;
     } else {
         error(1); // not found error
         strcpy(term_buffer, ""); // resets the buffer

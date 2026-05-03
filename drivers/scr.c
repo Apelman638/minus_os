@@ -110,8 +110,8 @@ vga_char *buff_put_formatted_str(vga_char* buffer, const char* str, color bg, co
 }
 
 void put_vga_char(const vga_char ch_in) { // MIGHT BE BACKWARDS
-    unsigned char format = ch_in & 0xff00; // takes the first byte
-    char ch = (ch_in & 0x00ff) >> 8; // takes the character byte, then puts it into a character
+    unsigned char format = (ch_in & 0xff00) >> 8; // takes the first byte
+    char ch = (ch_in & 0x00ff); // takes the character byte, then puts it into a character
     if(ch == '\n') { //new line
         VGA_MEMORY[vga_pos+1] = format; //sets the format for the current curser pos to not be highlighted
         VGA_MEMORY[vga_pos-1] = format; //sets the format for the spot before curser pos to not be highlighted

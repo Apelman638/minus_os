@@ -7,6 +7,8 @@
 #define NO 0
 #define DEBUG 1
 
+int random_factor = 1;
+
 /*
 typedef struct {
     unsigned int write : 1;
@@ -16,7 +18,7 @@ typedef struct {
 } Flags; 
 */
 
-static inline uint8_t inb(uint16_t port) {
+uint8_t inb(uint16_t port) {
     int val;
     __asm__ volatile ("inb %%dx, %%al" : "=a"(val) : "d"(port));
     /*
@@ -25,6 +27,8 @@ static inline uint8_t inb(uint16_t port) {
 
     this puts the value returned by the port and puts it into val
     */
+    //random_factor += val;
+    //random_factor &= 0xffffffff; slowed down snake too fucking much
     return val;
 }
 
