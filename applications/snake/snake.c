@@ -108,7 +108,7 @@ void move_x(int dir) {
 }
 
 void move_y(int dir) {
-    if(snake_parts[0].y-dir > VGA_HEIGHT-1 || snake_parts[0].y-dir < 0) {
+    if(snake_parts[0].y-dir > VGA_HEIGHT-1 || snake_parts[0].y-dir < -1) {
         death();
         return;
     }
@@ -125,8 +125,8 @@ void check_pos() {
         death();
     }
     if(apple.x == snake_parts[0].x && apple.y == snake_parts[0].y) {
-        int tail_x = snake_parts[length-1].x;
-        int tail_y = snake_parts[length-1].y;
+        int tail_x = 100;
+        int tail_y = 26;
         
         length++;
 
