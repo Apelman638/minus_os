@@ -1,0 +1,1 @@
+This is a basic kernel for qemu x86. It has a simple api with commands for printing to the vga and taking in keyboard inputs. 
