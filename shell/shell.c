@@ -63,7 +63,7 @@ void exec() {
             return;
         }
         vga_char *loaded_file = read_file(buff_filename, loaded_file); 
-        put_vga_str(loaded_file);
+        memcopy((char*)VGA_MEMORY, *loaded_file, stored_vga_length*2); 
         term_putchar('\n');
         return;
     } else if(strcmp(lsplit(term_buffer, ' ', temp_buff), ".write_file") == 0) {

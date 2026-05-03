@@ -6,6 +6,7 @@ int stored_vga_length;
 
 void save() {
     int i = 0;
+    //int j = 0;
     while(i <= vga_pos/2) { // /2 since vga_pos has both char and format position, so it is twice the ammount of vga_char
         //stored_vga[i] = ((VGA_MEMORY[j+1] << 8) & 0xff00) | (VGA_MEMORY[j] & 0x00ff); // stores as vga_char, first byte is the char and 2nd is the format
         memcopy(stored_vga + i, (const vga_char*)(VGA_MEMORY+(i*2)), sizeof(vga_char));
@@ -15,6 +16,7 @@ void save() {
                                 // memory is split low byte, high byte in the n_vga_strcmp 
                                 // really hard to comprehend and unintuitive at first
         i++;
+        //j+=2;
     }
     stored_vga_length = i;
     if(n_vga_strcmp(stored_vga, (const char*)VGA_MEMORY, stored_vga_length*2) == 0) { //uses generic compare to see if whats on the screen is the same as the storage 
