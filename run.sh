@@ -1,4 +1,5 @@
 #!/bin/bash
+#not a fan of make so i used this
 
 nasm -f elf32 bootloader.s -o objects/boot.o 
 x86_64-elf-gcc -c drivers/vga.c -o objects/vga.o -ffreestanding -nostdlib -m32

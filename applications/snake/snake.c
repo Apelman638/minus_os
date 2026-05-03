@@ -96,6 +96,7 @@ void snake() {
     init_vga();
     init_snake();
     display_snake();
+    
     while(running) {
         display_snake();
         int key_code = key_wait_arrow();

@@ -1,4 +1,4 @@
-#include "master.h"
+#include "master.h" // holds all files
 
 extern uint8_t __heap_start;
 extern uint8_t __heap_end;
