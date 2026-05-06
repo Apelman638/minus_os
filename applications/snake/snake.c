@@ -1,5 +1,6 @@
 #include "../../drivers/drivers.h"
 #include "../../stdlibc/stdlibc.h"
+#include "snake_special_functions.h"
 
 int running = 1;
 int dir_reload = 0x48;

@@ -103,13 +103,13 @@ void term_put_formatted_str(const char* str, color bg, color tc) {
 
 vga_char *buff_put_formatted_str(vga_char* buffer, const char* str, color bg, color tc) { // converts string into vga string
     while(*str) {
-        *buffer = (*str << 8) | ((bg << 4) | tc); // first byte is the char, 2nd is format
+        *buffer = (bg << 12) | (tc << 8) | *str; 
         buffer++, str++;
     }
     return buffer; 
 }
 
-void put_vga_char(const vga_char ch_in) { // MIGHT BE BACKWARDS
+void put_vga_char(const vga_char ch_in) { 
     unsigned char format = (ch_in & 0xff00) >> 8; // takes the first byte
     char ch = (ch_in & 0x00ff); // takes the character byte, then puts it into a character
     if(ch == '\n') { //new line

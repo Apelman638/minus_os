@@ -15,8 +15,9 @@ x86_64-elf-gcc -c sys/stored_screen.c -o objects/stored_screen.o -ffreestanding 
 x86_64-elf-gcc -c shell/shell.c -o objects/shell.o -ffreestanding -nostdlib -m32
 
 x86_64-elf-gcc -c applications/snake/snake.c -o objects/snake.o -ffreestanding -nostdlib -m32
+x86_64-elf-gcc -c applications/snake/snake_special_functions.c -o objects/snake_special_functions.o -ffreestanding -nostdlib -m32
 
 
 x86_64-elf-gcc -c kernel.c -o objects/kernel.o -ffreestanding -nostdlib -m32
-x86_64-elf-ld -m elf_i386 -T linker.ld objects/shell.o objects/ramdisk.o objects/stored_screen.o objects/boot.o objects/snake.o objects/str.o objects/kernel.o objects/scr.o objects/vga.o objects/keyboard.o objects/error.o objects/heap.o objects/files.o objects/super.o -o objects/kernel.elf
+x86_64-elf-ld -m elf_i386 -T linker.ld objects/shell.o objects/ramdisk.o objects/stored_screen.o objects/boot.o objects/snake.o objects/str.o objects/kernel.o objects/scr.o objects/vga.o objects/keyboard.o objects/error.o objects/heap.o objects/snake_special_functions.o objects/files.o objects/super.o -o objects/kernel.elf
 qemu-system-x86_64 -machine pc -kernel objects/kernel.elf       
