@@ -1,15 +1,58 @@
 #include "../master.h"
 #include "../applications/snake/snake.h"
+#include "../stdlibc/math.h"
 
 char term_buffer[100] = {0};
 int run = 1;
 
-void eval(char* equ) { // not implemented
+double eval(char* equ) { // not tested AND FIX MALLOC ERROR
     int num1;
     int num2;
+    char *num_1buff = malloc(strlen(equ));
+    char *num_2buff = malloc(strlen(equ));
+    char *current_buff = num_1buff; // points to the operation buffer 
+    int opperation;
     while(*equ) {
-        if(isdigit(*equ)) {
-            
+        if(isdigit(*equ) || isspace(*equ)) {
+            if(isspace(*equ)) continue;
+            *current_buff++ = *equ++; // stores digit in the buffer, later to be converted to number 
+        } else if(is_operation(*equ)) {
+            opperation = is_operation(*equ);
+            current_buff == num_2buff; // switches buffer
+        } else {
+            break;
+        }
+    }
+    switch(opperation) {
+        case (0) : {
+            free(num_1buff);
+            free(num_2buff);
+            return 0; // error
+        }
+        case (1) : {
+            free(num_1buff);
+            free(num_2buff);
+            return to_num(num_1buff) + to_num(num_1buff);
+        }
+        case (2) : {
+            free(num_1buff);
+            free(num_2buff);
+            return to_num(num_1buff) - to_num(num_1buff);
+        }
+        case (3) : {
+            free(num_1buff);
+            free(num_2buff);
+            return to_num(num_1buff) / to_num(num_1buff);
+        }
+        case (4) : {
+            free(num_1buff);
+            free(num_2buff);
+            return to_num(num_1buff) * to_num(num_1buff);
+        }
+        case (5) : {
+            free(num_1buff);
+            free(num_2buff);
+            return pow(to_num(num_1buff), to_num(num_1buff));
         }
     }
 }

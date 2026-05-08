@@ -3,6 +3,10 @@
 
 Flags state = {0,0,1,0,0};
 
+char get_color(int pos) {
+    return VGA_MEMORY[pos + 1]; 
+}
+
 void curser_loc(int loc) { // updates the position of the curser, visually and numerically 
     if(loc < 0) loc = vga_pos; //if it does out of bounds
     vga_pos = loc; // moves pos to loc

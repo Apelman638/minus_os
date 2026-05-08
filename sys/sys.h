@@ -4,5 +4,6 @@
 #include "files.h"
 #include "ramdisk.h"
 #include "stored_screen.h"
+#include "interupts.h"
 
 #endif

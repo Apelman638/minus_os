@@ -1,5 +1,6 @@
 // this will be used to take in user input from the keyboard
-#include "drivers.h" //for uint8_t etc
+#include "../master.h" //for uint8_t etc
+
 #define NULL 0
 
 #define READPORT (volatile uint8_t)0x64
@@ -18,7 +19,7 @@ typedef struct {
 } Flags; 
 */
 
-uint8_t inb(uint16_t port) {
+byte inb(uint16_t port) {
     int val;
     __asm__ volatile ("inb %%dx, %%al" : "=a"(val) : "d"(port));
     /*
@@ -32,7 +33,7 @@ uint8_t inb(uint16_t port) {
     return val;
 }
 
-static inline void outb(uint16_t port, int val) {
+void outb(uint16_t port, byte val) {
     __asm__ volatile ("outb %0, %1" :: "a"(val), "Nd"(port));
     /*
     outputs val into port

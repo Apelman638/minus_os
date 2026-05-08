@@ -9,6 +9,7 @@ int isupper(char ch);
 int isalpha(char ch);
 int isdigit(char ch);
 int isspace(char ch);
+int is_operation(char ch);
 char *lsplit(const char* str, const char split, char* buffer);
 char *rsplit(const char* str, const char split, char* buffer);
 char *strtok(const char* str, char split, char* buffer);

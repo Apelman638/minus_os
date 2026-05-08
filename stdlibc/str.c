@@ -5,14 +5,6 @@
 #include "stdlibc.h"
 #endif
 
-int pow(int x, int y) { // x^y, add to its own file
-    int ret = x;
-    for(int i = 1; i < y; i++) {
-        ret *= x;
-    }
-    return ret;
-}
-
 void strcpy(char* dest, const char* src) { //copies the whole string into another and adds a terminator at the end
     while(*src) { // while the char is not null
         *dest = *src; // set the char in this pos to be the src char in the same pos
@@ -179,12 +171,12 @@ int to_num(char* str) {
 int is_operation(char ch) {
     switch (ch) {
         case '+' : return 1;
-        case '-' : return 1;
-        case '/' : return 1;
-        case '*' : return 1;
-        case '^' : return 1;
+        case '-' : return 2;
+        case '/' : return 3;
+        case '*' : return 4;
+        case '^' : return 5;
         default: return 0;
-    }
+    }  
 }
 
 char *strtok(const char* str, char split, char* buffer) {

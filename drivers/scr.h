@@ -12,7 +12,7 @@ typedef struct {
 } Flags; 
 
 extern Flags state;
-
+char get_color(int pos);
 void term_putchar(char ch);
 void curser_loc(int loc);
 void term_putstr(const char* str);

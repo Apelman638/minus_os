@@ -1,11 +1,12 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
-
+#include "../master.h"
 #define READPORT (volatile uint8_t)0x64
 #define INPUTPORT (volatile uint8_t)0x60
 #define NO 0
 
-uint8_t inb(uint16_t port);
+byte inb(uint16_t port);
+void outb(uint16_t port, byte val);
 
 extern char term_buffer[100];
 extern const char keys[];
